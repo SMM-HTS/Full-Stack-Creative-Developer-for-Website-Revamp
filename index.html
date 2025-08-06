@@ -1,0 +1,1073 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IQudo - Innovate. Integrate. Elevate.</title>
+    <link href="https://fonts.googleapis.com/css2?family=Museo+Slab:wght@100;300;500&family=Black+Ops+One&family=Instrument+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2c463e;
+            --secondary: #b0cf50;
+            --accent: #ffdf43;
+            --dark: #121212;
+            --light: #99bec8;
+            --gray: #6b746b;
+            --navy: #3d5373;
+            --font-heading: 'Museo Slab', serif;
+            --font-bold: 'Black Ops One', cursive;
+            --font-body: 'Instrument Sans', sans-serif;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: var(--font-body);
+            color: var(--dark);
+            line-height: 1.7;
+            background-color: #f8f9fa;
+            overflow-x: hidden;
+            position: relative;
+        }
+        .particles {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            top: 0;
+            left: 0;
+        }
+        .particle {
+            position: absolute;
+            background-color: rgba(176, 207, 80, 0.15);
+            border-radius: 50%;
+            animation: float 15s infinite linear;
+        }
+        @keyframes float {
+            0% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-100px) rotate(180deg); }
+            100% { transform: translateY(0) rotate(360deg); }
+        }
+        .container {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 30px;
+        }
+        header {
+            background-color: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 5px 30px rgba(0,0,0,0.05);
+            position: fixed;
+            width: 100%;
+            z-index: 100;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+        }
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+        .logo {
+            font-family: var(--font-bold);
+            font-size: 32px;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+        .logo span {
+            font-size: 16px;
+            margin-left: 8px;
+            font-family: var(--font-body);
+            vertical-align: middle;
+            color: var(--secondary);
+        }
+        nav ul {
+            display: flex;
+            list-style: none;
+            align-items: center;
+        }
+        nav ul li {
+            margin-left: 35px;
+        }
+        nav ul li a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: all 0.3s;
+            position: relative;
+            font-size: 16px;
+        }
+        nav ul li a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: var(--secondary);
+            bottom: -5px;
+            left: 0;
+            transition: width 0.3s;
+        }
+        nav ul li a:hover:after {
+            width: 100%;
+        }
+        nav ul li a:hover {
+            color: var(--secondary);
+        }
+        .cta-nav {
+            background: var(--secondary);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: all 0.3s;
+            margin-left: 25px;
+        }
+        .cta-nav:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(176, 207, 80, 0.3);
+        }
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            font-size: 28px;
+            color: var(--primary);
+        }
+        .hero {
+            padding: 200px 0 150px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, rgba(153, 190, 200, 0.08) 0%, rgba(255, 255, 255, 0.9) 100%);
+        }
+        .hero h1 {
+            font-family: var(--font-heading);
+            font-size: 72px;
+            font-weight: 100;
+            margin-bottom: 25px;
+            color: var(--primary);
+            line-height: 1.2;
+            animation: fadeInUp 1s ease-out;
+        }
+        .hero-tagline {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 40px;
+            animation: fadeInUp 1s ease-out 0.2s forwards;
+            opacity: 0;
+        }
+        .tagline-item {
+            font-family: var(--font-bold);
+            font-size: 28px;
+            color: var(--secondary);
+            position: relative;
+        }
+        .tagline-item:not(:last-child):after {
+            content: '•';
+            position: absolute;
+            right: -20px;
+            color: var(--light);
+        }
+        .hero p {
+            font-size: 22px;
+            max-width: 800px;
+            margin: 0 auto 50px;
+            color: var(--gray);
+            animation: fadeInUp 1s ease-out 0.4s forwards;
+            opacity: 0;
+        }
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            animation: fadeInUp 1s ease-out 0.6s forwards;
+            opacity: 0;
+        }
+        .cta-button {
+            display: inline-block;
+            background-color: var(--secondary);
+            color: white;
+            padding: 18px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 18px;
+            transition: all 0.3s;
+            box-shadow: 0 10px 30px rgba(176, 207, 80, 0.3);
+            border: none;
+            cursor: pointer;
+        }
+        .cta-button:hover {
+            background-color: var(--primary);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(44, 70, 62, 0.3);
+        }
+        .secondary-button {
+            background-color: white;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+        }
+        .secondary-button:hover {
+            background-color: var(--primary);
+            color: white;
+            box-shadow: 0 10px 30px rgba(44, 70, 62, 0.2);
+        }
+        .stats {
+            padding: 100px 0;
+            background-color: white;
+        }
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+        }
+        .stat-card {
+            background: white;
+            border-radius: 15px;
+            padding: 50px 30px;
+            text-align: center;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+            border: 1px solid rgba(0,0,0,0.03);
+        }
+        .stat-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 50px rgba(0,0,0,0.1);
+        }
+        .stat-number {
+            font-family: var(--font-bold);
+            font-size: 60px;
+            color: var(--secondary);
+            margin-bottom: 15px;
+            line-height: 1;
+        }
+        .stat-label {
+            font-size: 18px;
+            color: var(--gray);
+        }
+        .services {
+            padding: 120px 0;
+            background-color: #f8f9fa;
+        }
+        .section-title {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+        .section-title h2 {
+            font-family: var(--font-heading);
+            font-size: 48px;
+            font-weight: 100;
+            color: var(--primary);
+            position: relative;
+            display: inline-block;
+        }
+        .section-title h2:after {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 3px;
+            background: var(--secondary);
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .section-title p {
+            color: var(--gray);
+            max-width: 700px;
+            margin: 25px auto 0;
+            font-size: 18px;
+        }
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+        }
+        .service-card {
+            background-color: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            z-index: 1;
+        }
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+        }
+        .service-icon {
+            height: 220px;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        .service-icon:after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(44, 70, 62, 0.8) 0%, rgba(44, 70, 62, 0.5) 100%);
+        }
+        .service-icon span {
+            z-index: 1;
+            font-family: var(--font-heading);
+            font-size: 80px;
+            font-weight: 100;
+            color: white;
+        }
+        .service-content {
+            padding: 40px;
+        }
+        .service-content h3 {
+            font-family: var(--font-heading);
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+        .service-content p {
+            color: var(--gray);
+            margin-bottom: 25px;
+            font-size: 16px;
+        }
+        .service-link {
+            color: var(--secondary);
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            transition: color 0.3s;
+            font-size: 16px;
+        }
+        .service-link:hover {
+            color: var(--primary);
+        }
+        .service-link:after {
+            content: '→';
+            margin-left: 8px;
+            transition: transform 0.3s;
+        }
+        .service-link:hover:after {
+            transform: translateX(5px);
+        }
+        .case-study {
+            padding: 120px 0;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--navy) 100%);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        .case-study .section-title h2 {
+            color: white;
+        }
+        .case-study .section-title h2:after {
+            background: var(--accent);
+        }
+        .case-study .section-title p {
+            color: rgba(255,255,255,0.8);
+        }
+        .case-study-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+        }
+        .case-card {
+            background-color: rgba(255,255,255,0.1);
+            border-radius: 15px;
+            padding: 40px;
+            transition: transform 0.3s;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .case-card:hover {
+            transform: translateY(-10px);
+            background-color: rgba(255,255,255,0.15);
+        }
+        .case-card h3 {
+            font-family: var(--font-heading);
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: white;
+        }
+        .case-card p {
+            margin-bottom: 25px;
+            opacity: 0.9;
+        }
+        .case-link {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+        }
+        .case-link:after {
+            content: '→';
+            margin-left: 8px;
+            transition: transform 0.3s;
+        }
+        .case-link:hover:after {
+            transform: translateX(5px);
+        }
+        .testimonials {
+            padding: 120px 0;
+            background-color: white;
+        }
+        .testimonial-slider {
+            max-width: 800px;
+            margin: 60px auto 0;
+            position: relative;
+        }
+        .testimonial {
+            background-color: white;
+            border-radius: 15px;
+            padding: 50px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.05);
+            text-align: center;
+            position: relative;
+        }
+        .testimonial:before {
+            content: '"';
+            font-family: var(--font-heading);
+            font-size: 120px;
+            position: absolute;
+            top: 20px;
+            left: 30px;
+            color: rgba(176, 207, 80, 0.1);
+            line-height: 1;
+        }
+        .testimonial p {
+            font-size: 20px;
+            font-style: italic;
+            margin-bottom: 30px;
+            color: var(--gray);
+            position: relative;
+            z-index: 1;
+        }
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .author-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-size: cover;
+            background-position: center;
+            margin-right: 20px;
+            border: 3px solid var(--secondary);
+        }
+        .author-info h4 {
+            font-weight: 600;
+            margin-bottom: 5px;
+            text-align: left;
+        }
+        .author-info p {
+            font-style: normal;
+            font-size: 14px;
+            opacity: 0.7;
+            text-align: left;
+        }
+        .slider-nav {
+            display: flex;
+            justify-content: center;
+            margin-top: 40px;
+            gap: 10px;
+        }
+        .slider-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: var(--light);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .slider-dot.active {
+            background-color: var(--secondary);
+            transform: scale(1.2);
+        }
+        .pricing {
+            padding: 120px 0;
+            background-color: #f8f9fa;
+        }
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+        }
+        .pricing-card {
+            background-color: white;
+            border-radius: 15px;
+            padding: 50px 40px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.05);
+            text-align: center;
+            transition: transform 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        .pricing-card.featured {
+            border: 2px solid var(--secondary);
+            transform: translateY(-20px);
+        }
+        .pricing-card.featured:after {
+            content: 'Popular';
+            position: absolute;
+            top: 20px;
+            right: -40px;
+            background: var(--secondary);
+            color: white;
+            padding: 5px 40px;
+            transform: rotate(45deg);
+            font-size: 12px;
+            font-weight: 600;
+        }
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 50px rgba(0,0,0,0.1);
+        }
+        .pricing-card h3 {
+            font-family: var(--font-heading);
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+        .price {
+            font-family: var(--font-bold);
+            font-size: 60px;
+            color: var(--secondary);
+            margin-bottom: 30px;
+            line-height: 1;
+        }
+        .price span {
+            font-size: 16px;
+            font-family: var(--font-body);
+            color: var(--gray);
+            font-weight: normal;
+        }
+        .pricing-features {
+            margin-bottom: 40px;
+        }
+        .pricing-features li {
+            list-style: none;
+            margin-bottom: 15px;
+            color: var(--gray);
+        }
+        .newsletter {
+            padding: 100px 0;
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--accent) 100%);
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        .newsletter h2 {
+            font-family: var(--font-heading);
+            font-size: 42px;
+            font-weight: 100;
+            margin-bottom: 20px;
+        }
+        .newsletter p {
+            max-width: 600px;
+            margin: 0 auto 40px;
+            font-size: 18px;
+            opacity: 0.9;
+        }
+        .newsletter-form {
+            max-width: 500px;
+            margin: 0 auto;
+            display: flex;
+            background: white;
+            border-radius: 50px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        .newsletter-input {
+            flex: 1;
+            padding: 18px 25px;
+            border: none;
+            outline: none;
+            font-family: var(--font-body);
+            font-size: 16px;
+        }
+        .newsletter-button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0 30px;
+            font-family: var(--font-body);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .newsletter-button:hover {
+            background: var(--dark);
+        }
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 80px 0 30px;
+            position: relative;
+        }
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 50px;
+            margin-bottom: 60px;
+        }
+        .footer-logo {
+            font-family: var(--font-bold);
+            font-size: 28px;
+            margin-bottom: 20px;
+            display: inline-block;
+            text-decoration: none;
+            color: white;
+        }
+        .footer-about p {
+            opacity: 0.7;
+            margin-bottom: 25px;
+            line-height: 1.7;
+        }
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+        .social-link {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background-color: rgba(255,255,255,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+        }
+        .social-link:hover {
+            background-color: var(--secondary);
+            transform: translateY(-3px);
+        }
+        .footer-links h3 {
+            font-family: var(--font-heading);
+            font-size: 20px;
+            margin-bottom: 25px;
+            font-weight: 100;
+        }
+        .footer-links ul {
+            list-style: none;
+        }
+        .footer-links ul li {
+            margin-bottom: 15px;
+        }
+        .footer-links ul li a {
+            color: white;
+            opacity: 0.7;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        .footer-links ul li a:hover {
+            opacity: 1;
+            color: var(--secondary);
+            padding-left: 5px;
+        }
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            opacity: 0.7;
+            font-size: 14px;
+        }
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        @media (max-width: 1200px) {
+            .hero h1 {
+                font-size: 60px;
+            }
+        }
+        @media (max-width: 992px) {
+            .header-container {
+                padding: 15px;
+            }
+            nav {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                width: 80%;
+                height: calc(100vh - 80px);
+                background-color: white;
+                box-shadow: 0 5px 30px rgba(0,0,0,0.1);
+                transition: left 0.3s;
+                z-index: 99;
+                padding-top: 50px;
+            }
+            nav.active {
+                left: 0;
+            }
+            nav ul {
+                flex-direction: column;
+                padding: 0 40px;
+            }
+            nav ul li {
+                margin: 20px 0;
+            }
+            .cta-nav {
+                margin-left: 0;
+                margin-top: 20px;
+            }
+            .hamburger {
+                display: block;
+            }
+            .hero {
+                padding: 180px 0 100px;
+            }
+            .hero h1 {
+                font-size: 48px;
+            }
+            .hero-tagline {
+                flex-direction: column;
+                gap: 15px;
+            }
+            .tagline-item:after {
+                display: none;
+            }
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            .section-title h2 {
+                font-size: 36px;
+            }
+        }
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 36px;
+            }
+            .hero p {
+                font-size: 18px;
+            }
+            .tagline-item {
+                font-size: 24px;
+            }
+            .section-title h2 {
+                font-size: 32px;
+            }
+            .service-card, .case-card, .pricing-card {
+                padding: 30px;
+            }
+            .testimonial {
+                padding: 40px 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="particles" id="particles"></div>
+
+    <header>
+        <div class="container header-container">
+            <a href="#" class="logo">IQudo<span>®</span></a>
+            <div class="hamburger">☰</div>
+            <nav>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Services</a></li>
+                    <li><a href="#">Case Studies</a></li>
+                    <li><a href="#">Pricing</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#" class="cta-nav">Get Started</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>Innovate. Integrate. Elevate.</h1>
+            <div class="hero-tagline">
+                <div class="tagline-item">95% Success</div>
+                <div class="tagline-item">12+ Industries</div>
+                <div class="tagline-item">Global Reach</div>
+            </div>
+            <p>We partner with clients to transform creativity into measurable business results through cutting-edge research and innovation training.</p>
+            <div class="hero-buttons">
+                <a href="#" class="cta-button">Free Assessment</a>
+                <a href="#" class="cta-button secondary-button">Learn More</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="stats">
+        <div class="container stats-container">
+            <div class="stat-card">
+                <div class="stat-number">95%</div>
+                <div class="stat-label">Client Satisfaction</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">12+</div>
+                <div class="stat-label">Industries Served</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">250+</div>
+                <div class="stat-label">Successful Projects</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">5x</div>
+                <div class="stat-label">ROI Guarantee</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="services">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Services</h2>
+                <p>Comprehensive solutions to unlock your organization's creative potential and drive innovation.</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon" style="background-image: url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');">
+                        <span>01</span>
+                    </div>
+                    <div class="service-content">
+                        <h3>Innovation Research</h3>
+                        <p>Cutting-edge research into creativity patterns across industries to identify opportunities for breakthrough innovation.</p>
+                        <a href="#" class="service-link">Explore Service</a>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon" style="background-image: url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');">
+                        <span>02</span>
+                    </div>
+                    <div class="service-content">
+                        <h3>Creative Integration</h3>
+                        <p>Seamless integration of creative methodologies into your existing workflows and processes.</p>
+                        <a href="#" class="service-link">Explore Service</a>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon" style="background-image: url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1351&q=80');">
+                        <span>03</span>
+                    </div>
+                    <div class="service-content">
+                        <h3>Performance Elevation</h3>
+                        <p>Customized training programs to elevate your team's creative thinking and problem-solving skills.</p>
+                        <a href="#" class="service-link">Explore Service</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="case-study">
+        <div class="container">
+            <div class="section-title">
+                <h2>Case Studies</h2>
+                <p>See how we've helped organizations transform their creative capabilities and achieve remarkable results.</p>
+            </div>
+            <div class="case-study-grid">
+                <div class="case-card">
+                    <h3>Tech Startup Innovation</h3>
+                    <p>Helped a SaaS company increase product innovation output by 150% through our creative methodology integration.</p>
+                    <a href="#" class="case-link">View Case Study</a>
+                </div>
+                <div class="case-card">
+                    <h3>Manufacturing Breakthrough</h3>
+                    <p>Enabled a manufacturing firm to reduce R&D costs by 30% while increasing patent filings by 40%.</p>
+                    <a href="#" class="case-link">View Case Study</a>
+                </div>
+                <div class="case-card">
+                    <h3>Financial Services Transformation</h3>
+                    <p>Transformed a bank's innovation culture, resulting in $250M in new revenue streams from creative products.</p>
+                    <a href="#" class="case-link">View Case Study</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonials">
+        <div class="container">
+            <div class="section-title">
+                <h2>Client Testimonials</h2>
+                <p>Hear what our clients say about working with IQudo to unlock their creative potential.</p>
+            </div>
+            <div class="testimonial-slider">
+                <div class="testimonial">
+                    <p>The creativity training transformed our team's approach to problem-solving. We've seen a 40% increase in innovative solutions since implementing IQudo's methods.</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar" style="background-image: url('https://randomuser.me/api/portraits/women/44.jpg');"></div>
+                        <div class="author-info">
+                            <h4>Sarah Johnson</h4>
+                            <p>Innovation Director, TechCorp</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="slider-nav">
+                    <div class="slider-dot active"></div>
+                    <div class="slider-dot"></div>
+                    <div class="slider-dot"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="pricing">
+        <div class="container">
+            <div class="section-title">
+                <h2>Pricing Plans</h2>
+                <p>Flexible options to fit your organization's needs and budget.</p>
+            </div>
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <h3>Starter</h3>
+                    <div class="price">$250<span>/month</span></div>
+                    <ul class="pricing-features">
+                        <li>Basic Creativity Assessment</li>
+                        <li>Quarterly Innovation Reports</li>
+                        <li>Email Support</li>
+                        <li>Up to 10 Team Members</li>
+                    </ul>
+                    <a href="#" class="cta-button secondary-button">Get Started</a>
+                </div>
+                <div class="pricing-card featured">
+                    <h3>Professional</h3>
+                    <div class="price">$750<span>/month</span></div>
+                    <ul class="pricing-features">
+                        <li>Comprehensive Assessment</li>
+                        <li>Monthly Innovation Reports</li>
+                        <li>Priority Support</li>
+                        <li>Up to 50 Team Members</li>
+                        <li>Quarterly Training Sessions</li>
+                    </ul>
+                    <a href="#" class="cta-button">Get Started</a>
+                </div>
+                <div class="pricing-card">
+                    <h3>Enterprise</h3>
+                    <div class="price">Custom</div>
+                    <ul class="pricing-features">
+                        <li>Tailored Solutions</li>
+                        <li>Weekly Innovation Reports</li>
+                        <li>24/7 Dedicated Support</li>
+                        <li>Unlimited Team Members</li>
+                        <li>Monthly Training & Workshops</li>
+                    </ul>
+                    <a href="#" class="cta-button secondary-button">Contact Us</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="newsletter">
+        <div class="container">
+            <h2>Stay Updated on Innovation</h2>
+            <p>Subscribe to our newsletter for the latest insights on creativity and business innovation.</p>
+            <form class="newsletter-form">
+                <input type="email" placeholder="Your email address" class="newsletter-input" required>
+                <button type="submit" class="newsletter-button">Subscribe</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-about">
+                    <a href="#" class="footer-logo">IQudo</a>
+                    <p>Translating Creativity into Data. Helping organizations unlock their creative potential through research-based innovation training.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link">f</a>
+                        <a href="#" class="social-link">in</a>
+                        <a href="#" class="social-link">t</a>
+                        <a href="#" class="social-link">ig</a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h3>Services</h3>
+                    <ul>
+                        <li><a href="#">Innovation Research</a></li>
+                        <li><a href="#">Creative Integration</a></li>
+                        <li><a href="#">Performance Elevation</a></li>
+                        <li><a href="#">Consulting</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Case Studies</a></li>
+                        <li><a href="#">Research Papers</a></li>
+                        <li><a href="#">Webinars</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h3>Company</h3>
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 IQudo®. All rights reserved. | <a href="#">Terms of Service</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.querySelector('.hamburger').addEventListener('click', function() {
+            document.querySelector('nav').classList.toggle('active');
+        });
+        document.querySelectorAll('nav ul li a').forEach(link => {
+            link.addEventListener('click', function() {
+                document.querySelector('nav').classList.remove('active');
+            });
+        });
+        function createParticles() {
+            const container = document.getElementById('particles');
+            for (let i = 0; i < 50; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.width = `${5 + Math.random() * 10}px`;
+                particle.style.height = particle.style.width;
+                particle.style.top = `${Math.random() * 100}%`;
+                particle.style.left = `${Math.random() * 100}%`;
+                particle.style.opacity = Math.random() * 0.5 + 0.1;
+                particle.style.animationDuration = `${15 + Math.random() * 30}s`;
+                particle.style.animationDelay = `${Math.random() * 20}s`;
+                container.appendChild(particle);
+            }
+        }
+        window.addEventListener('load', createParticles);
+        const dots = document.querySelectorAll('.slider-dot');
+        dots.forEach(dot => {
+            dot.addEventListener('click', function() {
+                dots.forEach(d => d.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>
